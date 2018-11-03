@@ -56,8 +56,6 @@ function init() {
 
 	document.addEventListener( 'mousedown', onDocumentMouseDown, false )
 
-	projector = new THREE.Projector();
-
 	window.addEventListener( 'resize', onWindowResize, false )
 
 }

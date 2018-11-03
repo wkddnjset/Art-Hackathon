@@ -35,7 +35,7 @@
     </div>
   </div>
 </div>
-
+<script src="/static/js/device_uuid.js"></script>
 <script>
   $('.img-check').click(function(e) {
     $('.img-check').not(this).removeClass('check').siblings('input').prop('checked',false)
@@ -43,11 +43,16 @@
   })  
   $("#heart").click(function(){
     var path = $(this).attr('src')
+    var uuid = new DeviceUUID().get()
     if (path=="/media/no_heart.png"){
+      // 공감 on!
       $(this).attr('src', "/media/heart.png")
+      console.log(uuid)
     }
     else{
+      // 공감 off!
       $(this).attr('src', "/media/no_heart.png")
+      console.log(uuid)
     }
     console.log($(this).attr('src'))
   })
