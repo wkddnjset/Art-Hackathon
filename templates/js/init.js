@@ -39,6 +39,8 @@ function init() {
 	// 구름
 	cloud_1 = cloud("cloud_1")
 	scene.add( cloud_1 )
+	//나무 밑둥
+	treeBottom(mesh_name="treeBottom_1", x=200, z=0)
 
 	// render
 	renderer = new THREE.WebGLRenderer( { antialias: true } )
