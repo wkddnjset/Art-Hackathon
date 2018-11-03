@@ -41,6 +41,261 @@
 
 		<script src="{% static '/js/Cloth.js' %}"></script>
 
-		
+		<script>
+		    var camera, scene, renderer
+		    var mouse = new THREE.Vector2(), INTERSECTED
+		    var mesh
+		    var raycaster = new THREE.Raycaster()
+			var mouseVector = new THREE.Vector3()
+
+		    init()
+		    animate()
+
+		    function init() {
+		    	container = document.createElement( 'div' )
+				document.body.appendChild( container )
+		        // scene
+				scene = new THREE.Scene()
+				scene.background = new THREE.Color( 0xcce0ff )
+				scene.fog = new THREE.Fog( 0xcce0ff, 400, 10000 )
+				// camera
+				camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 10000 )
+				camera.position.set( 1000, 1100, 2000 )
+
+				// lights
+				scene.add( new THREE.AmbientLight( 0x666666 ) )
+				var light = new THREE.DirectionalLight( 0xdfebff, 1 )
+				light.position.set( 200, 120, 80 )
+				light.position.multiplyScalar( 1 )
+				light.castShadow = true
+				light.shadow.mapSize.width = 1024
+				light.shadow.mapSize.height = 1024
+				var d = 1000
+				light.shadow.camera.left = - d
+				light.shadow.camera.right = d
+				light.shadow.camera.top = d
+				light.shadow.camera.bottom = - d
+				light.shadow.camera.far = 5000
+				scene.add( light )
+				// Ground
+				ground()
+				// Tree
+				tree(scale=0.5, mesh_name="tree_1", x=100, z=100)
+				tree(scale=0.2, mesh_name="tree_3", x=-20, z=170)
+				tree(scale=0.4, mesh_name="tree_4", x=50, z=-100)
+				tree(scale=1, mesh_name="tree_2", x=0, z=0)
+
+				// Butterfly
+				butterfly_1 = butterfly("butterfly_1")
+				scene.add( butterfly_1 )
+
+				// render
+				renderer = new THREE.WebGLRenderer( { antialias: true } )
+				renderer.setPixelRatio( window.devicePixelRatio )
+				renderer.setSize( window.innerWidth, window.innerHeight )
+				container.appendChild( renderer.domElement )
+				renderer.gammaInput = true
+				renderer.gammaOutput = true
+				renderer.shadowMap.enabled = true
+				// controls
+				var controls = new THREE.OrbitControls( camera, renderer.domElement )
+				controls.maxPolarAngle = Math.PI * 0.6
+				controls.minDistance = 1000
+				controls.maxDistance = 5000
+				// performance monitor
+				// stats = new Stats()
+				// container.appendChild( stats.dom )
+				//
+				document.addEventListener( 'mousedown', onDocumentMouseDown, false )
+
+				projector = new THREE.Projector();
+
+				window.addEventListener( 'resize', onWindowResize, false )
+
+		    }
+
+		    function onWindowResize() {
+
+		        camera.aspect = window.innerWidth / window.innerHeight
+		        camera.updateProjectionMatrix()
+
+		        renderer.setSize( window.innerWidth, window.innerHeight )
+
+		    }
+		    var a = 1
+		    function animate() {
+		        requestAnimationFrame( animate )
+		        // ll_1.rotation.x += 0.005;
+		        butterfly_1.rotation.y += 0.01
+		        
+		        // wingAnimate(ll_1, ls_1, rl_1, rs_1)
+		  		// butterfly_1.rotation.x += 0.005;
+				// butterfly_1.rotation.y += 0.01;
+		        renderer.render( scene, camera )
+		    }
+
+			function wingAnimate(ll,ls,rl,rs) {
+		        ll.rotation.z += 0.005;
+				// butterfly_1.rotation.y += 0.01;
+		        // renderer.render( scene, camera )
+		    }
+
+		    function ground(){
+				var grassMaterial = new THREE.MeshLambertMaterial( { color:  0xB3FF66 } )
+				var landMaterial = new THREE.MeshLambertMaterial( { color: 0x7D5A4F } )
+				var sm_Material = new THREE.MeshLambertMaterial( { color: 0xaa7744 } )
+
+				geometry = new THREE.CylinderGeometry( 800, 800, 5, 50 )
+				sm_geometry = new THREE.CylinderGeometry( 20, 20, 5, 50 )
+				var grass = new THREE.Mesh( geometry, grassMaterial )
+				grass.position.set( 0, -150, 0 )
+				grass.scale.set( 1, 10, 1 )
+				grass.receiveShadow = true
+				grass.castShadow = true
+				var land = new THREE.Mesh( geometry, landMaterial )
+				land.position.set( 0, -200, 0 )
+				land.scale.set( 1, 10, 1 )
+				var small_1 = new THREE.Mesh( sm_geometry, sm_Material )
+				small_1.position.set( 300, -126, 500 )
+				small_1.scale.set( 1, 1, 1 )
+				var small_2 = new THREE.Mesh( sm_geometry, sm_Material )
+				small_2.position.set( 0, -126, 300 )
+				small_2.scale.set( 1, 1, 1 )
+				var small_3 = new THREE.Mesh( sm_geometry, sm_Material )
+				small_3.position.set( -300, -126, -250 )
+				small_3.scale.set( 1, 1, 1 )
+				var small_4 = new THREE.Mesh( sm_geometry, sm_Material )
+				small_4.position.set( 600, -126, -50 )
+				small_4.scale.set( 1, 1, 1 )
+
+				ground = new THREE.Group();
+				ground.add( grass );
+				ground.add( land );
+				ground.add( small_1 );
+				ground.add( small_2 );
+				ground.add( small_3 );
+				ground.add( small_4 );
+
+				ground.position.x = 0
+				ground.position.y = -100
+				ground.receiveShadow = true
+				ground.castShadow = true
+			    scene.add( ground )
+		    }
+
+		    function tree(scale, mesh_name, x, z){
+		    	if (scale >= 1){
+		    		leaf_color=0x488441
+		    		stem_color=0x7D5A4F
+		    	}
+		    	else{
+		    		leaf_color=0x7daf63
+		    		stem_color=0x926044
+		    	}
+		    	var leaveDarkMaterial = new THREE.MeshLambertMaterial( { color: leaf_color } )
+				var stemMaterial = new THREE.MeshLambertMaterial( { color: stem_color } )
+
+				leaf_geometry = new THREE.ConeGeometry( 40, 80, 50 );
+				stem_geometry = new THREE.CylinderGeometry( 30, 30, 150, 50 )
+				var stem = new THREE.Mesh( stem_geometry, stemMaterial )
+				stem.position.set( 0, -100, 0 )
+				stem.scale.set( 1, 1, 1 )
+				stem.receiveShadow = true
+				stem.castShadow = true
+				stem.name=mesh_name
+
+				var leaf_1 = new THREE.Mesh( leaf_geometry, leaveDarkMaterial )
+				leaf_1.position.set( 0, 50, 0 )
+				leaf_1.scale.set( 2, 2, 2 )
+				leaf_1.receiveShadow = true
+				leaf_1.castShadow = true
+				leaf_1.name=mesh_name
+				var leaf_2 = new THREE.Mesh( leaf_geometry, leaveDarkMaterial )
+				leaf_2.position.set( 0, 130, 0 )
+				leaf_2.scale.set( 1.5, 1.5, 1.5 )
+				leaf_2.receiveShadow = true
+				leaf_2.castShadow = true
+				leaf_2.name=mesh_name
+				var leaf_3 = new THREE.Mesh( leaf_geometry, leaveDarkMaterial )
+				leaf_3.position.set( 0, 200, 0 )
+				leaf_3.scale.set( 1, 1, 1 )
+				leaf_3.receiveShadow = true
+				leaf_3.castShadow = true
+				leaf_3.name=mesh_name
+
+
+				mesh_name = new THREE.Group()
+				mesh_name.add( stem )
+				// tree.add( leaveDark );
+				// tree.add( leaveLight );
+				mesh_name.add( leaf_1 )
+				mesh_name.add( leaf_2 )
+				mesh_name.add( leaf_3 )
+				// tree.add( squareLeave02 );
+				// tree.add( squareLeave03 );
+				mesh_name.position.x = x
+				mesh_name.position.z = z
+				mesh_name.position.y = -(210-110*scale)
+				mesh_name.receiveShadow = true
+				mesh_name.castShadow = true
+				mesh_name.scale.set(scale, scale, scale)
+
+			    scene.add( mesh_name )
+		    }
+
+		    function butterfly(group) {
+		    	var wingMat = new THREE.MeshLambertMaterial( { color:  0xB3FF66 } )
+		    	wingGeo = new THREE.CylinderGeometry( 50, 50, 2, 50 )
+
+		    	var ll_wing = new THREE.Mesh( wingGeo, wingMat )
+				ll_wing.position.set( 0, 100, 0 )
+				ll_wing.rotation.set(0, 0, 100)
+				ll_wing.scale.set( 1, 1, 1 )
+				ll_wing.name = group 
+				var ls_wing = new THREE.Mesh( wingGeo, wingMat )
+				ls_wing.position.set( 10, 94, 50 )
+				ls_wing.rotation.set(0, 0, 100)
+				ls_wing.scale.set( 0.8, 0.8, 0.8 )
+				ls_wing.name = group 
+				var rl_wing = new THREE.Mesh( wingGeo, wingMat )
+				rl_wing.position.set( 90, 100, 0 )
+				rl_wing.rotation.set(0, 0, -100)
+				rl_wing.scale.set( 1, 1, 1 )
+				rl_wing.name = group 
+				var rs_wing = new THREE.Mesh( wingGeo, wingMat )
+				rs_wing.position.set( 80, 94, 50 )
+				rs_wing.rotation.set(0, 0, -100)
+				rs_wing.scale.set( 0.8, 0.8, 0.8 )
+				rs_wing.name = group 
+
+				
+				group = new THREE.Group()
+				group.add( ll_wing )
+				group.add( ls_wing )
+				group.add( rl_wing )
+				group.add( rs_wing )
+				group.position.set( 0, 0, 0 )
+				group.rotation.set(0, 0, 0)
+				group.position.x += 1
+				group.position.y = 10
+				group.receiveShadow = true
+				group.castShadow = true
+				
+				return group
+		    }
+		    function onDocumentMouseDown( event ) {
+				event.preventDefault();
+				x = ( event.clientX / window.innerWidth ) * 2 - 1
+				y = - ( event.clientY  / window.innerHeight ) * 2 + 1
+				mouseVector.set( x, y, 0.5 )
+				raycaster.setFromCamera( mouseVector, camera )
+				var obj = raycaster.intersectObject( scene, true )
+				var obj_name = obj[0].object.name
+				if (obj_name!=""){
+					$('#Detail').modal('show')
+					console.log(obj_name)
+				}
+			}
+		</script>
 	</body>
 </html>

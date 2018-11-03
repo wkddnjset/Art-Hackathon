@@ -24,7 +24,8 @@ function init() {
 	light.shadow.camera.bottom = - d
 	light.shadow.camera.far = 10000
 	scene.add( light )
-
+	// 데이터 불러오기
+	getData()
 	// 대지 추가
 	ground()
 	// 나무 추가

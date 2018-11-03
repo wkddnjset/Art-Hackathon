@@ -1,0 +1,54 @@
+<!-- Modal -->
+<style>
+  .box .btn{
+    padding: 0px;
+  }
+  .box input{
+    display: none;
+  }
+  .check{
+    filter: brightness(90%);
+  }
+  #heart{
+    cursor: pointer;
+  }
+</style>
+<div class="modal fade" id="Detail" tabindex="-1" role="dialog" aria-labelledby="WriteTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="DetailTitle">소리없는 고백</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h1>Title</h1>
+        <p class="text-left">This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content</p>
+        <div class="text-right">
+          <img id="heart" src="/media/no_heart.png" width="30">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">돌아가기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.img-check').click(function(e) {
+    $('.img-check').not(this).removeClass('check').siblings('input').prop('checked',false)
+    $(this).addClass('check').siblings('input').prop('checked',true)
+  })  
+  $("#heart").click(function(){
+    var path = $(this).attr('src')
+    if (path=="/media/no_heart.png"){
+      $(this).attr('src', "/media/heart.png")
+    }
+    else{
+      $(this).attr('src', "/media/no_heart.png")
+    }
+    console.log($(this).attr('src'))
+  })
+</script>

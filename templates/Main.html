@@ -8,9 +8,11 @@
 		숲 꾸미기
 	</button>
 	{% include './Modal/Write.html' %}
+    {% include './Modal/Detail.html' %}
 </div>
-
 <script>
+    {% include './js/_getData.js' %}
+    
     var camera, scene, renderer
     var mouse = new THREE.Vector2(), INTERSECTED
     var mesh
@@ -58,7 +60,9 @@
 			try{
 				var obj_name = obj[0].object.name
 				if (obj_name!=""){
+                    $('#Detail').modal('show')
 					console.log(obj_name)
+                    // $('#DetailTitle').text(obj_name)
 				}
 			}
 			catch(err){
