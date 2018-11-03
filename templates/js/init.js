@@ -30,7 +30,7 @@ function init() {
 	// 나무 추가
 	tree(scale=0.5, mesh_name="tree_1", x=100, z=100)
 	tree(scale=0.2, mesh_name="tree_3", x=-20, z=170)
-	tree(scale=0.4, mesh_name="tree_4", x=50, z=-100)
+	tree(scale=0.4, mesh_name="tree_4", x=500, z=-100)
 	tree(scale=1, mesh_name="tree_2", x=0, z=0)
 	// 나비 추가
 	butterfly_1 = butterfly("butterfly_1")

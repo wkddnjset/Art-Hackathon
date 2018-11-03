@@ -2,6 +2,14 @@
 
 {% block content %}
 {% load static %}
+<div id="info">
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#Write">
+		숲 꾸미기
+	</button>
+	{% include './Modal/Write.html' %}
+</div>
+
 <script>
     var camera, scene, renderer
     var mouse = new THREE.Vector2(), INTERSECTED
@@ -37,16 +45,24 @@
     // 다른 객체들 추가해주세요!!
 
     function onDocumentMouseDown( event ) {
-		event.preventDefault();
-		x = ( event.clientX / window.innerWidth ) * 2 - 1
-		y = - ( event.clientY  / window.innerHeight ) * 2 + 1
-		mouseVector.set( x, y, 0.5 )
-		raycaster.setFromCamera( mouseVector, camera )
-		var obj = raycaster.intersectObject( scene, true )
-		var obj_name = obj[0].object.name
-		if (obj_name!=""){
-			console.log(obj_name)
-		}
+    	// 모달이 실행되지 않는 상황에서
+    	if(!$('.modal').hasClass('show')){
+    		event.preventDefault()
+			x = ( event.clientX / window.innerWidth ) * 2 - 1
+			y = - ( event.clientY  / window.innerHeight ) * 2 + 1
+			mouseVector.set( x, y, 0.5 )
+			raycaster.setFromCamera( mouseVector, camera )
+			var obj = raycaster.intersectObject( scene, true )
+			try{
+				var obj_name = obj[0].object.name
+				if (obj_name!=""){
+					console.log(obj_name)
+				}
+			}
+			catch(err){
+				// console.log(err)
+			}
+    	}
 	}
 </script>
 {% endblock %}

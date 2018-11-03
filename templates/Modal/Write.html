@@ -1,0 +1,73 @@
+<!-- Modal -->
+<style>
+  .box .btn{
+    padding: 0px;
+  }
+  .box input{
+    display: none;
+  }
+  .check{
+    filter: brightness(90%);
+  }
+</style>
+<div class="modal fade" id="Write" tabindex="-1" role="dialog" aria-labelledby="WriteTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="WriteTitle">숲 꾸미기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">  
+          <div class="col-4 box">
+            <label class="btn btn-info">
+              <img src="/media/tree.jpg" alt="tree" class="img-thumbnail img-check">
+              <input type="radio" value="tree" class="hidden" autocomplete="off">
+            </label>
+          </div>
+          <div class="col-4 box">
+            <label class="btn btn-info">
+              <img src="/media/tree.jpg" alt="butter" class="img-thumbnail img-check">
+              <input type="radio" value="butter" class="hidden" autocomplete="off">
+            </label>
+          </div>
+          <div class="col-4 box">
+            <label class="btn btn-info">
+              <img src="/media/tree.jpg" alt="cloud" class="img-thumbnail img-check">
+              <input type="radio" value="cloud" class="hidden" autocomplete="off">
+            </label>
+          </div>
+        </div>
+      	<label for="title" style="float: left">제목</label>
+    		<div class="input-group mb-3">
+    		  <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요" onclick="$(this).focus()">
+    		</div>
+    		<label for="content" style="float: left">내용</label>
+    		<div class="input-group mb-3">
+    		  <textarea type="text" class="form-control" id="content" placeholder="내용을 입력해주세요" onclick="$(this).focus()"></textarea>
+    		</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+          <button id="Insert" type="button" class="btn btn-info">꾸미기</button>
+        </div>
+      </div>
+  </div>
+</div>
+
+<script>
+  $('.img-check').click(function(e) {
+    $('.img-check').not(this).removeClass('check').siblings('input').prop('checked',false)
+    $(this).addClass('check').siblings('input').prop('checked',true)
+  })  
+  $("#Insert").click(function(){
+    var img = $("input[type='radio']:checked").val()
+    var title = $("#title").val()
+    var content = $("textarea").val()
+    console.log("선택한 객체 : " + img)
+    console.log("제목 : " + title)
+    console.log("내용 : " + content)
+  })
+</script>
