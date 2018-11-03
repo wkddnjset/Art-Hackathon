@@ -37,7 +37,7 @@
     var t=0
     function animate() {
         requestAnimationFrame( animate )
-        butterfly_1.rotation.y += 0.02
+        // butterfly_1.rotation.y += 0.02
         renderer.render( scene, camera )
     }
 
@@ -46,11 +46,11 @@
     {% include './js/butterfly.js' %}
     {% include './js/cloud.js' %}
     {% include './js/flower.js' %}
-    {% include './js/treeBottom.js' %}
+    {% include './js/lake.js' %}
 
     // 다른 객체들 추가해주세요!!
 
-    function onDocumentMouseDown( event ) {
+    function onDocumentMouseUp( event ) {
     	// 모달이 실행되지 않는 상황에서
     	if(!$('.modal').hasClass('show')){
     		event.preventDefault()

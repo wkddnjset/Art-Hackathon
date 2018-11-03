@@ -1,4 +1,4 @@
-function tree(scale, group, x, z){
+function tree(group, scale, x, z){
 	if (scale >= 1){
 		leaf_color=0x488441
 		stem_color=0x7D5A4F

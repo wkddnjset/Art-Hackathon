@@ -1,4 +1,4 @@
-function butterfly(group) {
+function butterfly(group, x, y, z) {
 	var wingMat = new THREE.MeshLambertMaterial( { color:  0xffff00 } )
 	var lwingMat = new THREE.MeshLambertMaterial( { color:  0xff0000 } )
 	wingGeo = new THREE.CylinderGeometry( 50, 50, 2, 50 )
@@ -38,10 +38,8 @@ function butterfly(group) {
 	group.add( rl_wing )
 	group.add( rs_wing )
 	group.add( body )
-	group.position.set( 50, 0, 0 )
+	group.position.set( x, y, z )
 	group.rotation.set(0, 0, 0)
-	group.position.x += 1
-	group.position.y = 10
 	group.scale.set(0.2, 0.2, 0.2)
 	group.receiveShadow = true
 	group.castShadow = true

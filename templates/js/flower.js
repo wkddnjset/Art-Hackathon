@@ -1,4 +1,4 @@
-function flower(group) {
+function flower(group, x, z) {
     var leafMat = new THREE.MeshLambertMaterial( { color:  0xff0000 } )
     var mainMat = new THREE.MeshLambertMaterial( { color:  0x331a00 } )
     var stemMat = new THREE.MeshLambertMaterial( { color:  0x006600 } )
@@ -81,11 +81,8 @@ function flower(group) {
  //    group.add( cld3 )
  //    group.add( cld4 )
 	// group.add( cld5 )
-	group.position.set( 0, 0, 0 )
-	group.rotation.set(0, 0, 0)
-	group.position.x += 1
-	group.position.y = -180
-	group.rotation.set(1.5, 0, 0)
+	group.position.set( x, -180, z )
+	group.rotation.set(1.5, 0, -0.6)
 	group.scale.set(0.25, 0.25, 0.25)
 	group.receiveShadow = true
 	group.castShadow = true

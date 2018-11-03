@@ -1,4 +1,4 @@
-function cloud(group) {
+function cloud(group, x, y, z) {
     var wingMat1 = new THREE.MeshLambertMaterial( { color:  0xA9E2F3 } )
     var wingMat2 = new THREE.MeshLambertMaterial( { color:  0xA9E2F3 } )
     var wingMat3 = new THREE.MeshLambertMaterial( { color:  0xA9E2F3 } )
@@ -38,10 +38,9 @@ function cloud(group) {
     group.add( cld3 )
     group.add( cld4 )
 	group.add( cld5 )
-	group.position.set( 0, 0, 0 )
-	group.rotation.set(0, 0, 0)
-	group.position.x += 1
-	group.position.y = 10
+	group.position.set( x, y, z)
+	group.scale.set(0.5, 0.5, 0.5)
+	group.rotation.set(0, -1, 0)
 	group.receiveShadow = true
 	group.castShadow = true
 

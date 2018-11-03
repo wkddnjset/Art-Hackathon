@@ -28,21 +28,24 @@ function init() {
 	// getData()
 	// 대지 추가
 	ground()
+	// 연못 추가
+	lake()
 	// 나무 추가
-	tree(scale=0.5, mesh_name="tree_1", x=100, z=100)
-	tree(scale=0.2, mesh_name="tree_3", x=-20, z=170)
-	tree(scale=0.4, mesh_name="tree_4", x=500, z=-100)
-	tree(scale=1, mesh_name="tree_2", x=-100, z=-200)
+	tree( group="tree_1", scale=0.5, x=100, z=100)
+	tree(group="tree_3", scale=0.2, x=-20, z=170)
+	tree(group="tree_4", scale=0.4, x=500, z=-100)
+	tree(group="tree_2", scale=1, x=-100, z=-200)
 	// 나비 추가
-	butterfly_1 = butterfly("butterfly_1")
+	// y : -200~0
+	butterfly_1 = butterfly(group="butterfly_1", x=20, y=0, z=-100)
 	scene.add( butterfly_1 )
+
 	// 구름
-	cloud_1 = cloud("cloud_1")
+	// y : 300 - 450
+	cloud_1 = cloud("cloud_1", x=0, y=350, z=0)
 	scene.add( cloud_1 )
-	//나무 밑둥
-	treeBottom(mesh_name="treeBottom_1", x=200, z=0)
 	// 꽃
-	flower_1 = flower("flower_1")
+	flower_1 = flower("flower_1", x=150, z=50)
 	scene.add( flower_1 )
 
 	// render
@@ -59,7 +62,7 @@ function init() {
 	controls.minDistance = 1000
 	controls.maxDistance = 5000
 
-	document.addEventListener( 'mousedown', onDocumentMouseDown, false )
+	document.addEventListener( 'mouseup', onDocumentMouseUp, false )
 
 	window.addEventListener( 'resize', onWindowResize, false )
 
