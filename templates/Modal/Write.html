@@ -24,34 +24,34 @@
           <div class="col-4 box">
             <label class="btn btn-info">
               <img src="/media/tree.jpg" alt="tree" class="img-thumbnail img-check">
-              <input type="radio" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
+              <input type="radio" value="tree" class="hidden" autocomplete="off">
             </label>
           </div>
           <div class="col-4 box">
             <label class="btn btn-info">
-              <img src="/media/tree.jpg" alt="..." class="img-thumbnail img-check">
-              <input type="radio" name="chk1" id="item4" value="val2" class="hidden" autocomplete="off">
+              <img src="/media/tree.jpg" alt="butter" class="img-thumbnail img-check">
+              <input type="radio" value="butter" class="hidden" autocomplete="off">
             </label>
           </div>
           <div class="col-4 box">
             <label class="btn btn-info">
-              <img src="/media/tree.jpg" alt="tree" class="img-thumbnail img-check">
-              <input type="radio" name="chk1" id="item4" value="val3" class="hidden" autocomplete="off">
+              <img src="/media/tree.jpg" alt="cloud" class="img-thumbnail img-check">
+              <input type="radio" value="cloud" class="hidden" autocomplete="off">
             </label>
           </div>
         </div>
       	<label for="title" style="float: left">제목</label>
     		<div class="input-group mb-3">
-    		  <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요">
+    		  <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요" onclick="$(this).focus()">
     		</div>
     		<label for="content" style="float: left">내용</label>
     		<div class="input-group mb-3">
-    		  <textarea type="text" class="form-control" id="content" placeholder="내용을 입력해주세요"></textarea>
+    		  <textarea type="text" class="form-control" id="content" placeholder="내용을 입력해주세요" onclick="$(this).focus()"></textarea>
     		</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-          <button type="button" class="btn btn-info">꾸미기</button>
+          <button id="Insert" type="button" class="btn btn-info">꾸미기</button>
         </div>
       </div>
   </div>
@@ -62,4 +62,12 @@
     $('.img-check').not(this).removeClass('check').siblings('input').prop('checked',false)
     $(this).addClass('check').siblings('input').prop('checked',true)
   })  
+  $("#Insert").click(function(){
+    var img = $("input[type='radio']:checked").val()
+    var title = $("#title").val()
+    var content = $("textarea").val()
+    console.log("선택한 객체 : " + img)
+    console.log("제목 : " + title)
+    console.log("내용 : " + content)
+  })
 </script>

@@ -22,7 +22,6 @@ function butterfly(group) {
 	rs_wing.rotation.set(0, 0, -100)
 	rs_wing.scale.set( 0.8, 0.8, 0.8 )
 	rs_wing.name = group 
-
 	
 	group = new THREE.Group()
 	group.add( ll_wing )
