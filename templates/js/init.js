@@ -7,7 +7,7 @@ function init() {
 	scene.fog = new THREE.Fog( 0xcce0ff, 400, 10000 )
 	// camera
 	camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 10000 )
-	camera.position.set( 1000, 1100, 2000 )
+	camera.position.set( 1000, 1200, 1800 )
 
 	// lights
 	scene.add( new THREE.AmbientLight( 0x666666 ) )
@@ -24,15 +24,15 @@ function init() {
 	light.shadow.camera.bottom = - d
 	light.shadow.camera.far = 5000
 	scene.add( light )
-	// Ground
+
+	// 대지 추가
 	ground()
-	// Tree
+	// 나무 추가
 	tree(scale=0.5, mesh_name="tree_1", x=100, z=100)
 	tree(scale=0.2, mesh_name="tree_3", x=-20, z=170)
 	tree(scale=0.4, mesh_name="tree_4", x=50, z=-100)
 	tree(scale=1, mesh_name="tree_2", x=0, z=0)
-
-	// Butterfly
+	// 나비 추가
 	butterfly_1 = butterfly("butterfly_1")
 	scene.add( butterfly_1 )
 
@@ -49,10 +49,7 @@ function init() {
 	controls.maxPolarAngle = Math.PI * 0.6
 	controls.minDistance = 1000
 	controls.maxDistance = 5000
-	// performance monitor
-	// stats = new Stats()
-	// container.appendChild( stats.dom )
-	//
+
 	document.addEventListener( 'mousedown', onDocumentMouseDown, false )
 
 	projector = new THREE.Projector();
