@@ -35,6 +35,9 @@ function init() {
 	// 나비 추가
 	butterfly_1 = butterfly("butterfly_1")
 	scene.add( butterfly_1 )
+	// 구름
+	cloud_1 = cloud("cloud_1")
+	scene.add( cloud_1 )
 
 	// render
 	renderer = new THREE.WebGLRenderer( { antialias: true } )

@@ -12,7 +12,7 @@
     init()
     animate()
 
-    
+
     {% include './js/init.js' %}
 
     function onWindowResize() {
@@ -25,19 +25,14 @@
     }
     function animate() {
         requestAnimationFrame( animate )
-        butterfly_1.rotation.y += 0.01        
+        butterfly_1.rotation.y += 0.01
         renderer.render( scene, camera )
-    }
-
-	function wingAnimate(ll,ls,rl,rs) {
-        ll.rotation.z += 0.005;
-		// butterfly_1.rotation.y += 0.01;
-        // renderer.render( scene, camera )
     }
 
     {% include './js/ground.js' %}
     {% include './js/tree.js' %}
     {% include './js/butterfly.js' %}
+    {% include './js/cloud.js' %}
 
     // 다른 객체들 추가해주세요!!
 
