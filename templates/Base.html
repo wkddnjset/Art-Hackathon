@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>소리없는 고백</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<script src="{% static '/js/three.js' %}"></script>
+		<script src="{% static '/js/Projector.js' %}"></script>
+		
+		<script src="{% static '/js/WebGL.js' %}"></script>
+
+		<script src="{% static '/js/OrbitControls.js' %}"></script>
+		<script src="{% static '/js/stats.min.js' %}"></script>
+
+		<script src="{% static '/js/Cloth.js' %}"></script>
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #000;
+				color: #000;
+				margin: 0px;
+				overflow: hidden;
+			}
+			#info {
+				position: absolute;
+				padding: 10px;
+				width: 100%;
+				text-align: center;
+			}
+			a {
+				text-decoration: underline;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="info">Simple Cloth Simulation<br/>
+			Verlet integration with relaxed constraints<br/>
+		</div>
+
+		
+
+
+	</body>
+</html>
