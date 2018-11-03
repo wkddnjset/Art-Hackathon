@@ -1,7 +1,9 @@
 function lake(){
 	var lakeMat = new THREE.MeshLambertMaterial( { color:  0x6666ff } )
-
     lakeGeo = new THREE.CylinderGeometry( 100, 100, 1, 50 )
+    var stoneMat = new THREE.MeshLambertMaterial( { color:  0x999999 } )
+    stoneGeo = new THREE.DodecahedGeometry( 100, 0 )
+
 	var lake_1 = new THREE.Mesh( lakeGeo, lakeMat )
 	lake_1.position.set( 0, -223, 20 )
 	lake_1.scale.set( 1, 1, 1 )
@@ -14,11 +16,17 @@ function lake(){
 	lake_3.position.set( -80, -223, 140 )
 	lake_3.scale.set( 0.6, 0.5, 0.6 )
 
+	var stone_1 = new THREE.Mesh( stoneGeo, stoneMat )
+	stone_1.position.set( -80, -223, 140 )
+	stone_1.scale.set( 0.5, 0.5, 0.5 )
+
 
 	lakeG = new THREE.Group()
     lakeG.add( lake_1 )
     lakeG.add( lake_2 )
     lakeG.add( lake_3 )
+    lakeG.add( stone_1 )
+
 
 	lakeG.position.set(0,0,0)
 	// group.position.y = -(210-110*scale)

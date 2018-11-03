@@ -46,13 +46,9 @@
             </label>
           </div>
         </div>
-      	<label for="title" style="float: left">제목</label>
-    		<div class="input-group mb-3">
-    		  <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요" onclick="$(this).focus()">
-    		</div>
     		<label for="content" style="float: left">내용</label>
     		<div class="input-group mb-3">
-    		  <textarea type="text" class="form-control" id="content" placeholder="내용을 입력해주세요" onclick="$(this).focus()"></textarea>
+    		  <textarea type="text" class="form-control" id="content" maxlength="150" placeholder="내용을 150자 이내로 입력해주세요" onclick="$(this).focus()"></textarea>
     		</div>
         </div>
         <div class="modal-footer">
@@ -70,10 +66,30 @@
   })  
   $("#Insert").click(function(){
     var img = $("input[type='radio']:checked").val()
-    var title = $("#title").val()
     var content = $("textarea").val()
     console.log("선택한 객체 : " + img)
-    console.log("제목 : " + title)
     console.log("내용 : " + content)
+    // 이미지 1:나무 / 2:나비 / 3:꽃 / 4:구름, 내용
+    var formData = 'mode=getMsg&txID='+txID;
+    $.ajax({
+      url: "http://54.169.253.56/",
+      contentType: 'application/json; charset=utf-8',
+      crossDomain: true,
+      dataType: 'jsonp',
+      method : "POST",
+      data : formData,
+      success: function (data, textStatus, jqXHR) {
+        console.log(data);
+        console.log(textStatus);
+        console.log(jqXHR);
+        // 성공시 새로고침
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+
+      }
+    })
   })
 </script>

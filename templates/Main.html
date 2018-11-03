@@ -11,7 +11,6 @@
     {% include './Modal/Detail.html' %}
 </div>
 <script>
-    {% include './js/_getData.js' %}
     
     var camera, scene, renderer
     var mouse = new THREE.Vector2(), INTERSECTED
@@ -64,7 +63,26 @@
 				if (obj_name!=""){
                     $('#Detail').modal('show')
 					console.log(obj_name)
-                    // $('#DetailTitle').text(obj_name)
+                    var formData = 'mode=getMsg&txID='+obj_name;
+                    $.ajax({
+                        url: "http://54.169.253.56/",
+                        contentType: 'application/json; charset=utf-8',
+                        crossDomain: true,
+                        dataType: 'jsonp',
+                        method : "POST",
+                        data : formData,
+                        success: function (data, textStatus, jqXHR) {
+                            console.log(data);
+                            console.log(textStatus);
+                            console.log(jqXHR);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(jqXHR);
+                            console.log(textStatus);
+                            console.log(errorThrown);
+
+                        }
+                    })
 				}
 			}
 			catch(err){

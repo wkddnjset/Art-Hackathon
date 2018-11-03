@@ -87,5 +87,5 @@ function flower(group, x, z) {
 	group.receiveShadow = true
 	group.castShadow = true
 
-	return group
+	scene.add( group )
 }

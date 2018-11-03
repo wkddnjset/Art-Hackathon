@@ -44,16 +44,38 @@
   $("#heart").click(function(){
     var path = $(this).attr('src')
     var uuid = new DeviceUUID().get()
+    
+
     if (path=="/media/no_heart.png"){
       // 공감 on!
       $(this).attr('src', "/media/heart.png")
-      console.log(uuid)
+      var heart_flag = 1
     }
     else{
       // 공감 off!
       $(this).attr('src', "/media/no_heart.png")
-      console.log(uuid)
+      var heart_flag = 0
     }
-    console.log($(this).attr('src'))
+    // 공감 on, off 에 따라 flag 변경
+    // device_id, bbs_id, heart_flag
+    var formData = 'mode=getMsg&txID='+txID;
+    $.ajax({
+        url: "http://54.169.253.56/",
+        contentType: 'application/json; charset=utf-8',
+        crossDomain: true,
+        dataType: 'jsonp',
+        method : "POST",
+        data : formData,
+        success: function (data, textStatus, jqXHR) {
+          console.log(data);
+          console.log(textStatus);
+          console.log(jqXHR);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR);
+          console.log(textStatus);
+          console.log(errorThrown);
+        }
+    })
   })
 </script>

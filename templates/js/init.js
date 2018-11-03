@@ -7,7 +7,7 @@ function init() {
 	scene.fog = new THREE.Fog( 0xcce0ff, 400, 10000 )
 	// camera
 	camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 10000 )
-	camera.position.set( 1000, 1200, 1800 )
+	camera.position.set( 1500, 1500, 2000 )
 
 	// lights
 	scene.add( new THREE.AmbientLight( 0x666666 ) )
@@ -43,11 +43,62 @@ function init() {
 	// 구름
 	// y : 300 - 450
 	cloud_1 = cloud("cloud_1", x=0, y=350, z=0)
-	scene.add( cloud_1 )
 	// 꽃
 	flower_1 = flower("flower_1", x=150, z=50)
-	scene.add( flower_1 )
 
+
+	var butterfly_list = []
+	// 데이터 불러오기
+	var formData = 'mode=getMsg&txID=0';
+    $.ajax({
+        url: "http://54.169.253.56/",
+        contentType: 'application/json; charset=utf-8',
+        crossDomain: true,
+        dataType: 'jsonp',
+        method : "GET",
+        data : formData,
+        success: function (response, textStatus, jqXHR) {
+        	var obj = $.parseJSON(response.data)
+
+        	for (var i=0; i<obj.length; i++){
+        		if (obj[i].likeCnt < 10){
+        			var scale = 0.2
+        		}
+        		else if (obj[i].likeCnt > 120){
+        			var scale = 1.2
+        		}
+        		else {
+        			var scale = obj[i].likeCnt / 10
+        		}
+        		// 나무
+        		if (obj[i].type==1){
+        			tree( group=obj[i].txId, scale=scale, x=obj[i].x, z=obj[i].z)
+        		}
+        		// 나비
+        		else if (obj[i].type==2){
+        			butterfly_list.push(butterfly(group=obj[i].txId, x=20, y=0, z=-100))
+        			// obj[i].txId = butterfly(group=obj[i].txId, x=20, y=0, z=-100)
+					scene.add( butterfly(group=obj[i].txId, x=20, y=0, z=-100) )
+        		}
+        		// 꽃
+        		else if (obj[i].type==3){
+        			flower(group=obj[i].txId, x=obj[i].x, z=obj[i].z)
+        		}
+        		// 구름
+        		else if (obj[i].type==4){
+        			cloud(group=obj[i].txId, x=obj[i].x, y=obj[i].y, z=obj[i].z)
+        		}
+        	}
+            console.log(obj);
+            console.log(textStatus);
+            console.log(jqXHR);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        }
+    })
 	// render
 	renderer = new THREE.WebGLRenderer( { antialias: true } )
 	renderer.setPixelRatio( window.devicePixelRatio )

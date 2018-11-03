@@ -44,5 +44,5 @@ function cloud(group, x, y, z) {
 	group.receiveShadow = true
 	group.castShadow = true
 
-	return group
+	scene.add( group )
 }
