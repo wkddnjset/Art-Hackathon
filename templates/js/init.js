@@ -12,7 +12,7 @@ function init() {
 	// lights
 	scene.add( new THREE.AmbientLight( 0x666666 ) )
 	var light = new THREE.DirectionalLight( 0xdfebff, 1 )
-	light.position.set( 200, 120, 80 )
+	light.position.set( 250, 120, 150 )
 	light.position.multiplyScalar( 1 )
 	light.castShadow = true
 	light.shadow.mapSize.width = 1024
@@ -22,7 +22,7 @@ function init() {
 	light.shadow.camera.right = d
 	light.shadow.camera.top = d
 	light.shadow.camera.bottom = - d
-	light.shadow.camera.far = 5000
+	light.shadow.camera.far = 10000
 	scene.add( light )
 
 	// 대지 추가
@@ -31,7 +31,7 @@ function init() {
 	tree(scale=0.5, mesh_name="tree_1", x=100, z=100)
 	tree(scale=0.2, mesh_name="tree_3", x=-20, z=170)
 	tree(scale=0.4, mesh_name="tree_4", x=500, z=-100)
-	tree(scale=1, mesh_name="tree_2", x=0, z=0)
+	tree(scale=1, mesh_name="tree_2", x=-100, z=-200)
 	// 나비 추가
 	butterfly_1 = butterfly("butterfly_1")
 	scene.add( butterfly_1 )

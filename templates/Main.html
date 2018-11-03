@@ -31,9 +31,11 @@
         renderer.setSize( window.innerWidth, window.innerHeight )
 
     }
+    var animate_loop = 0
+    var t=0
     function animate() {
         requestAnimationFrame( animate )
-        butterfly_1.rotation.y += 0.01
+        butterfly_1.rotation.y += 0.02
         renderer.render( scene, camera )
     }
 
