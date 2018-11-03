@@ -1,4 +1,4 @@
-function tree(scale, mesh_name, x, z){
+function tree(scale, group, x, z){
 	if (scale >= 1){
 		leaf_color=0x488441
 		stem_color=0x7D5A4F
@@ -17,43 +17,43 @@ function tree(scale, mesh_name, x, z){
 	stem.scale.set( 1, 1, 1 )
 	stem.receiveShadow = true
 	stem.castShadow = true
-	stem.name=mesh_name
+	stem.name=group
 
 	var leaf_1 = new THREE.Mesh( leaf_geometry, leaveDarkMaterial )
 	leaf_1.position.set( 0, 50, 0 )
 	leaf_1.scale.set( 2, 2, 2 )
 	leaf_1.receiveShadow = true
 	leaf_1.castShadow = true
-	leaf_1.name=mesh_name
+	leaf_1.name=group
 	var leaf_2 = new THREE.Mesh( leaf_geometry, leaveDarkMaterial )
 	leaf_2.position.set( 0, 130, 0 )
 	leaf_2.scale.set( 1.5, 1.5, 1.5 )
 	leaf_2.receiveShadow = true
 	leaf_2.castShadow = true
-	leaf_2.name=mesh_name
+	leaf_2.name=group
 	var leaf_3 = new THREE.Mesh( leaf_geometry, leaveDarkMaterial )
 	leaf_3.position.set( 0, 200, 0 )
 	leaf_3.scale.set( 1, 1, 1 )
 	leaf_3.receiveShadow = true
 	leaf_3.castShadow = true
-	leaf_3.name=mesh_name
+	leaf_3.name=group
 
 
-	mesh_name = new THREE.Group()
-	mesh_name.add( stem )
+	group = new THREE.Group()
+	group.add( stem )
 	// tree.add( leaveDark );
 	// tree.add( leaveLight );
-	mesh_name.add( leaf_1 )
-	mesh_name.add( leaf_2 )
-	mesh_name.add( leaf_3 )
+	group.add( leaf_1 )
+	group.add( leaf_2 )
+	group.add( leaf_3 )
 	// tree.add( squareLeave02 );
 	// tree.add( squareLeave03 );
-	mesh_name.position.x = x
-	mesh_name.position.z = z
-	mesh_name.position.y = -(210-110*scale)
-	mesh_name.receiveShadow = true
-	mesh_name.castShadow = true
-	mesh_name.scale.set(scale, scale, scale)
+	group.position.x = x
+	group.position.z = z
+	group.position.y = -(210-110*scale)
+	group.receiveShadow = true
+	group.castShadow = true
+	group.scale.set(scale, scale, scale)
 
-    scene.add( mesh_name )
+    scene.add( group )
 }
