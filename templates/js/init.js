@@ -77,9 +77,7 @@ function init() {
         		}
         		// 나비
         		else if (obj[i].type==2){
-        			butterfly_list.push(butterfly(group=obj[i].txId, x=20, y=0, z=-100))
-        			// obj[i].txId = butterfly(group=obj[i].txId, x=20, y=0, z=-100)
-					scene.add( butterfly(group=obj[i].txId, x=20, y=0, z=-100) )
+        			butterfly(group=obj[i].txId, x=obj[i].x, y=obj[i].y, z=obj[i].z)
         		}
         		// 꽃
         		else if (obj[i].type==3){

@@ -81,6 +81,9 @@
 							if( jsonObj.likeCnt == "1" ){
 								$("#heart").attr('src', "/media/heart.png")
 							}
+                            else{
+                                $("#heart").attr('src', "/media/no_heart.png")
+                            }
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             console.log(jqXHR);

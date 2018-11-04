@@ -44,5 +44,5 @@ function butterfly(group, x, y, z) {
 	group.receiveShadow = true
 	group.castShadow = true
 	
-	return group
+	scene.add( group )
 }
