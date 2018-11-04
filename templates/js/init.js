@@ -60,16 +60,17 @@ function init() {
         data : formData,
         success: function (response, textStatus, jqXHR) {
         	var obj = $.parseJSON(response.data)
-
+        	var scale = 0
         	for (var i=0; i<obj.length; i++){
-        		if (obj[i].likeCnt*3 < 10){
-        			var scale = 0.5
+
+        		if (obj[i].allLike*1.5 < 10){
+        			scale = 0.5
         		}
-        		else if (obj[i].likeCnt*3 > 120){
-        			var scale = 1.2
+        		else if (obj[i].allLike*1.5 > 50){
+        			scale = 1
         		}
         		else {
-        			var scale = obj[i].likeCnt*3 / 10
+        			scale = obj[i].allLike*1.5/ 10
         		}
         		// 나무
         		if (obj[i].type==1){
