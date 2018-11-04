@@ -113,7 +113,7 @@ function init() {
 	controls.maxDistance = 5000
 
 	document.addEventListener( 'mouseup', onDocumentMouseUp, false )
-
+	document.addEventListener( 'touchend', onDocumentTouchEnd, false )
 	window.addEventListener( 'resize', onWindowResize, false )
 
 }
