@@ -50,6 +50,7 @@
 							console.log(jsonObj);
 							$(".text-left").html(jsonObj.message);
 							$("#heart").data( "role", jsonObj.txId )
+                            $("#heart_num").text(jsonObj.allLike)
 							//하트를 누른상태일 경우
 							if( jsonObj.likeCnt == "1" ){
 								$("#heart").attr('src', "/media/heart.png")
@@ -100,6 +101,7 @@
 							console.log(jsonObj);
 							$(".text-left").html(jsonObj.message);
 							$("#heart").data( "role", jsonObj.txId )
+                            $("#heart_num").text(jsonObj.allLike)
 							//하트를 누른상태일 경우
 							if( jsonObj.likeCnt == "1" ){
 								$("#heart").attr('src', "/media/heart.png")

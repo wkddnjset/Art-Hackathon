@@ -62,14 +62,14 @@ function init() {
         	var obj = $.parseJSON(response.data)
 
         	for (var i=0; i<obj.length; i++){
-        		if (obj[i].likeCnt < 10){
+        		if (obj[i].likeCnt*3 < 10){
         			var scale = 0.5
         		}
-        		else if (obj[i].likeCnt > 120){
+        		else if (obj[i].likeCnt*3 > 120){
         			var scale = 1.2
         		}
         		else {
-        			var scale = obj[i].likeCnt / 10
+        			var scale = obj[i].likeCnt*3 / 10
         		}
         		// 나무
         		if (obj[i].type==1){
