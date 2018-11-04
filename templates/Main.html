@@ -22,37 +22,10 @@
     animate()
 
 
-    {% include './js/init.js' %}
-
-    function onWindowResize() {
-
-        camera.aspect = window.innerWidth / window.innerHeight
-        camera.updateProjectionMatrix()
-
-        renderer.setSize( window.innerWidth, window.innerHeight )
-
-    }
-    var animate_loop = 0
-    var t=0
-    function animate() {
-        requestAnimationFrame( animate )
-        // butterfly_1.rotation.y += 0.02
-        renderer.render( scene, camera )
-    }
-
-    {% include './js/ground.js' %}
-    {% include './js/tree.js' %}
-    {% include './js/butterfly.js' %}
-    {% include './js/cloud.js' %}
-    {% include './js/flower.js' %}
-    {% include './js/lake.js' %}
-
-    // 다른 객체들 추가해주세요!!
-
     function onDocumentMouseUp( event ) {
     	// 모달이 실행되지 않는 상황에서
     	if(!$('.modal').hasClass('show')){
-    		// event.preventDefault()
+    		//event.preventDefault()
 			var uuid = new DeviceUUID().get()
 			x = ( event.clientX / window.innerWidth ) * 2 - 1
 			y = - ( event.clientY  / window.innerHeight ) * 2 + 1
@@ -99,5 +72,81 @@
 			}
     	}
 	}
+	function onDocumentTouchEnd( event ) {
+		// 모달이 실행되지 않는 상황에서
+		if(!$('.modal').hasClass('show')){
+			//event.preventDefault()
+			var uuid = new DeviceUUID().get()
+			x = ( event.changedTouches[0].clientX / window.innerWidth ) * 2 - 1
+			y = - ( event.changedTouches[0].clientY  / window.innerHeight ) * 2 + 1
+			mouseVector.set( x, y, 0.5 )
+			raycaster.setFromCamera( mouseVector, camera )
+			var obj = raycaster.intersectObject( scene, true )
+			try{
+				var obj_name = obj[0].object.name;
+				if (obj_name!=""){
+					$('#Detail').modal('show')
+					var formData = 'mode=getMsg&txId='+obj_name+"&device_id="+uuid;;
+					$.ajax({
+						url: "http://54.169.253.56/",
+						contentType: 'application/json; charset=utf-8',
+						crossDomain: true,
+						dataType: 'jsonp',
+						method : "POST",
+						data : formData,
+						success: function (data, textStatus, jqXHR) {
+							var fixedResponse = data.data.replace(/\\'/g, "'");
+							var jsonObj = JSON.parse(fixedResponse);
+							console.log(jsonObj);
+							$(".text-left").html(jsonObj.message);
+							$("#heart").data( "role", jsonObj.txId )
+							//하트를 누른상태일 경우
+							if( jsonObj.likeCnt == "1" ){
+								$("#heart").attr('src', "/media/heart.png")
+							}
+							else{
+								$("#heart").attr('src', "/media/no_heart.png")
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown) {
+							console.log(jqXHR);
+							console.log(textStatus);
+							console.log(errorThrown);
+
+						}
+					})
+				}
+			}
+			catch(err){
+				// console.log(err)
+			}
+		}
+	}
+    {% include './js/init.js' %}
+
+    function onWindowResize() {
+
+        camera.aspect = window.innerWidth / window.innerHeight
+        camera.updateProjectionMatrix()
+
+        renderer.setSize( window.innerWidth, window.innerHeight )
+
+    }
+    var animate_loop = 0
+    var t=0
+    function animate() {
+        requestAnimationFrame( animate )
+        // butterfly_1.rotation.y += 0.02
+        renderer.render( scene, camera )
+    }
+
+    {% include './js/ground.js' %}
+    {% include './js/tree.js' %}
+    {% include './js/butterfly.js' %}
+    {% include './js/cloud.js' %}
+    {% include './js/flower.js' %}
+    {% include './js/lake.js' %}
+
+    // 다른 객체들 추가해주세요!!
 </script>
 {% endblock %}
