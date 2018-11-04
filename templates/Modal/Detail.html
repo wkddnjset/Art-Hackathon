@@ -18,15 +18,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="DetailTitle">소리없는 고백</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal"  aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <h1>Title</h1>
-        <p class="text-left">This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content.This is Content</p>
+        <p class="text-left"></p>
         <div class="text-right">
-          <img id="heart" src="/media/no_heart.png" width="30">
+          <img id="heart" src="/media/no_heart.png" width="30" data-role="" />
         </div>
       </div>
       <div class="modal-footer">
@@ -40,11 +39,11 @@
   $('.img-check').click(function(e) {
     $('.img-check').not(this).removeClass('check').siblings('input').prop('checked',false)
     $(this).addClass('check').siblings('input').prop('checked',true)
-  })  
+  })
   $("#heart").click(function(){
     var path = $(this).attr('src')
     var uuid = new DeviceUUID().get()
-    
+
 
     if (path=="/media/no_heart.png"){
       // 공감 on!
@@ -58,7 +57,7 @@
     }
     // 공감 on, off 에 따라 flag 변경
     // device_id, bbs_id, heart_flag
-    var formData = 'mode=getMsg&txID='+txID;
+    var formData = 'mode=like&txid='+$("#heart").data( "role" )+"&device_id="+uuid;
     $.ajax({
         url: "http://54.169.253.56/",
         contentType: 'application/json; charset=utf-8',
@@ -68,8 +67,8 @@
         data : formData,
         success: function (data, textStatus, jqXHR) {
           console.log(data);
-          console.log(textStatus);
-          console.log(jqXHR);
+         // console.log(textStatus);
+          //console.log(jqXHR);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.log(jqXHR);

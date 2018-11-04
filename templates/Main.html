@@ -11,7 +11,7 @@
     {% include './Modal/Detail.html' %}
 </div>
 <script>
-    
+
     var camera, scene, renderer
     var mouse = new THREE.Vector2(), INTERSECTED
     var mesh
@@ -53,17 +53,17 @@
     	// 모달이 실행되지 않는 상황에서
     	if(!$('.modal').hasClass('show')){
     		event.preventDefault()
+			var uuid = new DeviceUUID().get()
 			x = ( event.clientX / window.innerWidth ) * 2 - 1
 			y = - ( event.clientY  / window.innerHeight ) * 2 + 1
 			mouseVector.set( x, y, 0.5 )
 			raycaster.setFromCamera( mouseVector, camera )
 			var obj = raycaster.intersectObject( scene, true )
 			try{
-				var obj_name = obj[0].object.name
+				var obj_name = obj[0].object.name;
 				if (obj_name!=""){
                     $('#Detail').modal('show')
-					console.log(obj_name)
-                    var formData = 'mode=getMsg&txID='+obj_name;
+                    var formData = 'mode=getMsg&txId='+obj_name+"&device_id="+uuid;;
                     $.ajax({
                         url: "http://54.169.253.56/",
                         contentType: 'application/json; charset=utf-8',
@@ -72,9 +72,15 @@
                         method : "POST",
                         data : formData,
                         success: function (data, textStatus, jqXHR) {
-                            console.log(data);
-                            console.log(textStatus);
-                            console.log(jqXHR);
+							var fixedResponse = data.data.replace(/\\'/g, "'");
+							var jsonObj = JSON.parse(fixedResponse);
+							console.log(jsonObj);
+							$(".text-left").html(jsonObj.message);
+							$("#heart").data( "role", jsonObj.txId )
+							//하트를 누른상태일 경우
+							if( jsonObj.likeCnt == "1" ){
+								$("#heart").attr('src', "/media/heart.png")
+							}
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             console.log(jqXHR);

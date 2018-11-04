@@ -20,7 +20,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="form-group row">  
+        <div class="form-group row">
           <div class="col-3 box">
             <label class="btn btn-info">
               <img src="/media/tree.jpg" alt="tree" class="img-thumbnail img-check">
@@ -63,14 +63,14 @@
   $('.img-check').click(function(e) {
     $('.img-check').not(this).removeClass('check').siblings('input').prop('checked',false)
     $(this).addClass('check').siblings('input').prop('checked',true)
-  })  
+  })
   $("#Insert").click(function(){
     var img = $("input[type='radio']:checked").val()
     var content = $("textarea").val()
     console.log("선택한 객체 : " + img)
     console.log("내용 : " + content)
     // 이미지 1:나무 / 2:나비 / 3:꽃 / 4:구름, 내용
-    var formData = 'mode=getMsg&txID='+txID;
+    var formData = 'mode=insertMsg&type='+img+"&message="+content;
     $.ajax({
       url: "http://54.169.253.56/",
       contentType: 'application/json; charset=utf-8',
@@ -79,10 +79,9 @@
       method : "POST",
       data : formData,
       success: function (data, textStatus, jqXHR) {
-        console.log(data);
-        console.log(textStatus);
-        console.log(jqXHR);
+        //console.log(data);
         // 성공시 새로고침
+        location.href="/";
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.log(jqXHR);

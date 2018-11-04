@@ -30,6 +30,7 @@ function init() {
 	ground()
 	// 연못 추가
 	lake()
+	/*
 	// 나무 추가
 	tree( group="tree_1", scale=0.5, x=100, z=100)
 	tree(group="tree_3", scale=0.2, x=-20, z=170)
@@ -45,11 +46,11 @@ function init() {
 	cloud_1 = cloud("cloud_1", x=0, y=350, z=0)
 	// 꽃
 	flower_1 = flower("flower_1", x=150, z=50)
-
+*/
 
 	var butterfly_list = []
 	// 데이터 불러오기
-	var formData = 'mode=getMsg&txID=0';
+	var formData = 'mode=getMsg&txId=0';
     $.ajax({
         url: "http://54.169.253.56/",
         contentType: 'application/json; charset=utf-8',
@@ -62,7 +63,7 @@ function init() {
 
         	for (var i=0; i<obj.length; i++){
         		if (obj[i].likeCnt < 10){
-        			var scale = 0.2
+        			var scale = 0.5
         		}
         		else if (obj[i].likeCnt > 120){
         			var scale = 1.2
@@ -89,9 +90,9 @@ function init() {
         			cloud(group=obj[i].txId, x=obj[i].x, y=obj[i].y, z=obj[i].z)
         		}
         	}
-            console.log(obj);
-            console.log(textStatus);
-            console.log(jqXHR);
+            //console.log(obj);
+            //console.log(textStatus);
+            //console.log(jqXHR);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(jqXHR);
