@@ -52,7 +52,7 @@
     function onDocumentMouseUp( event ) {
     	// 모달이 실행되지 않는 상황에서
     	if(!$('.modal').hasClass('show')){
-    		event.preventDefault()
+    		// event.preventDefault()
 			var uuid = new DeviceUUID().get()
 			x = ( event.clientX / window.innerWidth ) * 2 - 1
 			y = - ( event.clientY  / window.innerHeight ) * 2 + 1
