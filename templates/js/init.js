@@ -63,15 +63,12 @@ function init() {
         	var scale = 0
         	for (var i=0; i<obj.length; i++){
 
-        		if (obj[i].allLike*1.5 < 10){
-        			scale = 0.5
+        		if(obj[i].allLike < 20) {
+        			scale = obj[i].allLike*0.0275 + 0.45;
+        		}else{
+        			scale = 1;
         		}
-        		else if (obj[i].allLike*1.5 > 50){
-        			scale = 1
-        		}
-        		else {
-        			scale = obj[i].allLike*1.5/ 10
-        		}
+
         		// 나무
         		if (obj[i].type==1){
         			tree( group=obj[i].txId, scale=scale, x=obj[i].x, z=obj[i].z)
